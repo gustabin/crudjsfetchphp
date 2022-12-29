@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema CRUD</title>
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="images/favicon.ico" />
+  </head>
+  <body>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">
+        <img src="images/logo.png" width="60" height="60" alt="Logo" />
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div
+        class="collapse navbar-collapse"
+        id="navbarNav"
+        style="justify-content: flex-end"
+      >
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="https://gustabin.com">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://guskit.com/cv">Portafolio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="https://www.youtube.com/@guskit/videos"
+              >Youtube</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Aquí se mostrarán los elementos de la base de datos -->
+    <div class="container mt-5">
+      <h1>Lista de elementos</h1>
+      <button
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#modal-agregar"
+        style="margin-top: 5px; margin-bottom: 13px"
+      >
+        <i
+          class="far fa-plus-square fa-lg"
+          title="Agregar registro"
+          data-toggle="tooltip"
+        ></i>
+      </button>
+
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="lista-elementos"></tbody>
+      </table>
+    </div>
+
+    <!-- Modal para agregar elementos -->
+    <div class="modal fade" id="modal-agregar" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Agregar elemento</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="form-agregar">
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="nombre"
+                  name="nombre"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="correo">Correo</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="correo"
+                  name="correo"
+                  required
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Agregar elemento
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para editar elementos -->
+    <div class="modal fade" id="modal-editar" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Editar elemento</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="form-editar">
+              <input type="hidden" id="form-editar-id" name="form-editar-id" />
+              <div class="form-group">
+                <label for="form-editar-nombre">Nombre</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="form-editar-nombre"
+                  name="form-editar-nombre"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="form-editar-correo">Correo</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="form-editar-correo"
+                  name="form-editar-correo"
+                  required
+                />
+              </div>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Cerrar
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Guardar cambios
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer, links y copyright -->
+    <div class="container">
+      <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+          <li class="nav-item">
+            <a href="https://gustabin.com" class="nav-link px-2 text-muted"
+              >Inicio</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="https://gustabin.com/academia"
+              class="nav-link px-2 text-muted"
+              >Academia</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              href="https://www.youtube.com/@guskit/videos"
+              class="nav-link px-2 text-muted"
+              >Youtube</a
+            >
+          </li>
+          <li class="nav-item">
+            <a href="https://guskit.com/cv" class="nav-link px-2 text-muted"
+              >Portafolio</a
+            >
+          </li>
+        </ul>
+        <p class="text-center text-muted">&copy; 2023 Gustabin</p>
+      </footer>
+    </div>
+
+    <!--  script obligatorios -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+    <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.19.0/jquery.validate.min.js"></script>
+
+    <!--  script sweet alert -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!--  scripts nuestros -->
+    <script src="js/usuario.js"></script>
+  </body>
+</html>
